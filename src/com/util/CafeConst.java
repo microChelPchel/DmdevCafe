@@ -1,6 +1,6 @@
 package com.util;
 
-public final class CageConst {
+public final class CafeConst {
 
     public static final int BUYER_WAIT_TIME = 5;
     public static final int MAX_PRODUCT_COUNT = 5;
@@ -9,7 +9,7 @@ public final class CageConst {
     public static final int CASHBOX_STATS_JOB_PERIOD = 60;
     public static final int WINNER_JOB_PERIOD = 90;
 
-    private CageConst() {
+    private CafeConst() {
 
     }
 
