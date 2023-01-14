@@ -9,7 +9,7 @@ import com.util.RandomUtil;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.BlockingDeque;
+import java.util.concurrent.BlockingQueue;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -19,13 +19,12 @@ public class Buyer implements Runnable {
 
     private final Integer id;
     private final List<Order> orders = new ArrayList<>();
-    private final BlockingDeque<Order> allOrders;
+    private final BlockingQueue<Order> allOrders;
 
-    public Buyer(BlockingDeque<Order> allOrders) {
+    public Buyer(BlockingQueue<Order> allOrders) {
         this.id = idGenerator++;
         this.allOrders = allOrders;
     }
-
 
     @Override
     public void run() {

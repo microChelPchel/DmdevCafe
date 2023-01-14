@@ -12,6 +12,17 @@ public class Product {
         this.price = price;
     }
 
+    public ProductType getType() {
+        return type;
+    }
+
+    public int getCalories() {
+        return calories;
+    }
+
+    public int getPrice() {
+        return price;
+    }
 }
 
 
