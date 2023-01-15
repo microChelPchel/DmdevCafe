@@ -1,6 +1,7 @@
 package com.job;
 
 import com.csv.BuyerRow;
+import com.csv.CashboxRow;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -20,26 +21,31 @@ public class WinnerJob implements Runnable {
 
     @Override
     public void run() {
-//        try {
-//            determineBuyerWinner();
-//            determineBuyerWinner();
-//            determineCashboxWinner();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
+        try {
+            determineBuyerWinner();
+            determineBuyerWinner();
+            determineCashboxWinner();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
-    private void determineCashboxWinner() {
-
+    private void determineBuyerWinner() throws IOException {
+        Files.readAllLines(buyerStatsPath)
+                .stream()
+                .map(line -> line.split(SEPARATOR))
+                .map(BuyerRow::new)
+                .max(comparing(buyerRow -> buyerRow.getOrderNumber() * buyerRow.getOrderPriceAvg()))
+                .ifPresent(buyerRow -> System.out.println("Buyer winner: "+ buyerRow.getId()));
     }
 
-//    private void determineBuyerWinner() throws IOException {
-//        Files.readAllLines(buyerStatsPath)
-//                .stream()
-//                .map(line -> line.split(SEPARATOR))
-//                .map(BuyerRow::new)
-//                .map(comparing(buyerRow -> buyerRow.getOrderNumber orderNumber() * buyerRow.orderPriceAvg()))
-//    }
-
+    private void determineCashboxWinner() throws IOException {
+        Files.readAllLines(cashboxStatsPath)
+                .stream()
+                .map(line -> line.split(SEPARATOR))
+                .map(CashboxRow::new)
+                .max(comparing(cashboxRow -> cashboxRow.getOrderPriceSum() / cashboxRow.getOrderNumber() ))
+                .ifPresent(cashboxRow -> System.out.println("Cashbox winner: "+ cashboxRow.getId()));
+    }
 
 }
